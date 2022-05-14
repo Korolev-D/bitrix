@@ -1,0 +1,25 @@
+<?
+$aMenuLinks = Array(
+    Array(
+        "Каталог",
+        "/catalog/",
+        Array(),
+        Array("CATALOG"=>"16"),
+        ""
+    ),
+    Array(
+        "Коллекции",
+        "/collections/",
+        Array(),
+        Array(),
+        ""
+    ),
+    Array(
+        "Услуги",
+        "/services/",
+        Array(),
+        Array(),
+        ""
+    )
+);
+?>
