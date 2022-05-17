@@ -1,6 +1,5 @@
 <?php
 if(!defined("B_PROLOG_INCLUDED")||B_PROLOG_INCLUDED!==true)die();
-
 /**
  * Bitrix vars
  *
@@ -35,6 +34,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 				$arResult["ERROR_MESSAGE"][] = GetMessage("MF_REQ_NAME");		
 			if((empty($arParams["REQUIRED_FIELDS"]) || in_array("EMAIL", $arParams["REQUIRED_FIELDS"])) && mb_strlen($_POST["user_email"]) <= 1)
 				$arResult["ERROR_MESSAGE"][] = GetMessage("MF_REQ_EMAIL");
+            if((empty($arParams["REQUIRED_FIELDS"]) || in_array("PHONE", $arParams["REQUIRED_FIELDS"])) && mb_strlen($_POST["user_phone"]) <= 1)
+                $arResult["ERROR_MESSAGE"][] = GetMessage("MF_REQ_PHONE");
 			if((empty($arParams["REQUIRED_FIELDS"]) || in_array("MESSAGE", $arParams["REQUIRED_FIELDS"])) && mb_strlen($_POST["MESSAGE"]) <= 3)
 				$arResult["ERROR_MESSAGE"][] = GetMessage("MF_REQ_MESSAGE");
 		}
@@ -60,6 +61,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 			$arFields = Array(
 				"AUTHOR" => $_POST["user_name"],
 				"AUTHOR_EMAIL" => $_POST["user_email"],
+				"AUTHOR_PHONE" => $_POST["user_phone"],
 				"EMAIL_TO" => $arParams["EMAIL_TO"],
 				"TEXT" => $_POST["MESSAGE"],
 			);
@@ -68,6 +70,27 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $_POST["submit"] <> '' && (!isset($_P
 				foreach($arParams["EVENT_MESSAGE_ID"] as $v)
 					if(intval($v) > 0)
 						CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields, "N", intval($v));
+
+                CModule::IncludeModule('iblock');
+                $el = new CIBlockElement;
+
+                $PROP = array();
+
+                $PROP[30] =  htmlspecialcharsbx($_POST['user_name']);
+                $PROP[31] =  htmlspecialcharsbx($_POST['user_email']);
+                $PROP[32] =  htmlspecialcharsbx($_POST['user_phone']);
+                $PROP[33] =  htmlspecialcharsbx($_POST['MESSAGE']);
+
+                $feedback = Array(
+                    "MODIFIED_BY"    => 1,
+                    "IBLOCK_SECTION_ID" => false,
+                    "IBLOCK_ID"      => 5,
+                    "PROPERTY_VALUES"=> $PROP,
+                    "NAME"           => "Форма с сайта ",
+                    "ACTIVE"         => "Y",
+                );
+
+                $el->Add($feedback);
 			}
 			else
 				CEvent::Send($arParams["EVENT_NAME"], SITE_ID, $arFields);
