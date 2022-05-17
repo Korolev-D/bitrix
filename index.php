@@ -4,66 +4,55 @@ $APPLICATION->SetTitle("Hmart - Home One");
 ?>
 
     <!-- Hero/Intro Slider Start -->
-    <div class="section ">
-        <div class="hero-slider swiper-container slider-nav-style-1 slider-dot-style-1">
-            <!-- Hero slider Active -->
-            <div class="swiper-wrapper">
-                <!-- Single slider item -->
-                <div class="hero-slide-item slider-height swiper-slide bg-color1" data-bg-image="<?= SITE_TEMPLATE_PATH?>/assets/images/hero/bg/hero-bg-1.webp">
-                    <div class="container h-100">
-                        <div class="row h-100">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
-                                <div class="hero-slide-content slider-animated-1">
-                                    <span class="category">Welcome To Hmart</span>
-                                    <h2 class="title-1">Your Home <br>
-                                        Smart Devices & <br>
-                                        Best Solution </h2>
-                                    <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">Shop All Devices</a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-end">
-                                <div class="show-case">
-                                    <div class="hero-slide-image">
-                                        <img src="<?= SITE_TEMPLATE_PATH?>/assets/images/hero/inner-img/hero-1-1.png" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Single slider item -->
-                <div class="hero-slide-item slider-height swiper-slide bg-color1" data-bg-image="<?= SITE_TEMPLATE_PATH?>/assets/images/hero/bg/hero-bg-1.webp">
-                    <div class="container h-100">
-                        <div class="row h-100">
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 align-self-center sm-center-view">
-                                <div class="hero-slide-content slider-animated-1">
-                                    <span class="category">Welcome To Hmart</span>
-                                    <h2 class="title-1">Your Home <br>
-                                        Smart Devices & <br>
-                                        Best Solution </h2>
-                                    <a href="shop-left-sidebar.html" class="btn btn-primary text-capitalize">Shop All Devices</a>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center position-relative align-items-end">
-                                <div class="show-case">
-                                    <div class="hero-slide-image">
-                                        <img src="<?= SITE_TEMPLATE_PATH?>/assets/images/hero/inner-img/hero-1-2.png" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Add Pagination -->
-            <div class="swiper-pagination swiper-pagination-white"></div>
-            <!-- Add Arrows -->
-            <div class="swiper-buttons">
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-            </div>
-        </div>
-    </div>
+<?$APPLICATION->IncludeComponent(
+    "bitrix:news.list",
+    "slider",
+    Array(
+        "DISPLAY_DATE" => "Y",
+        "DISPLAY_NAME" => "Y",
+        "DISPLAY_PICTURE" => "Y",
+        "DISPLAY_PREVIEW_TEXT" => "Y",
+        "AJAX_MODE" => "N",
+        "IBLOCK_TYPE" => "news",
+        "IBLOCK_ID" => "4",
+        "NEWS_COUNT" => "20",
+        "SORT_BY1" => "ACTIVE_FROM",
+        "SORT_ORDER1" => "DESC",
+        "SORT_BY2" => "SORT",
+        "SORT_ORDER2" => "ASC",
+        "FILTER_NAME" => "",
+        "FIELD_CODE" => array("SLIDER_LINK"),
+        "PROPERTY_CODE" => array("SLIDER_LINK"),
+        "CHECK_DATES" => "Y",
+        "DETAIL_URL" => "",
+        "PREVIEW_TRUNCATE_LEN" => "",
+        "ACTIVE_DATE_FORMAT" => "",
+        "SET_TITLE" => "N",
+        "SET_STATUS_404" => "N",
+        "INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+        "ADD_SECTIONS_CHAIN" => "N",
+        "HIDE_LINK_WHEN_NO_DETAIL" => "N",
+        "PARENT_SECTION" => "",
+        "PARENT_SECTION_CODE" => "",
+        "CACHE_TYPE" => "A",
+        "CACHE_TIME" => "36000000",
+        "CACHE_NOTES" => "",
+        "CACHE_FILTER" => "N",
+        "CACHE_GROUPS" => "N",
+        "DISPLAY_TOP_PAGER" => "N",
+        "DISPLAY_BOTTOM_PAGER" => "N",
+        "PAGER_TITLE" => "Слайдер",
+        "PAGER_SHOW_ALWAYS" => "N",
+        "PAGER_TEMPLATE" => "",
+        "PAGER_DESC_NUMBERING" => "N",
+        "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
+        "PAGER_SHOW_ALL" => "N",
+        "AJAX_OPTION_JUMP" => "N",
+        "AJAX_OPTION_STYLE" => "Y",
+        "AJAX_OPTION_HISTORY" => "N",
+        "AJAX_OPTION_ADDITIONAL" => ""
+    )
+);?>
     <!-- Hero/Intro Slider End -->
     <!-- Banner Area Start -->
     <div class="banner-area style-one pt-100px pb-100px">
@@ -930,6 +919,34 @@ $APPLICATION->SetTitle("Hmart - Home One");
         </div>
     </div>
     <!-- Product Area End -->
+    <!-- Feeedback Start -->
+    <div class="fashion-area" data-bg-image="<?= SITE_TEMPLATE_PATH?>/assets/images/fashion/fashion-bg.webp">
+        <div class="container h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 text-center">
+
+                    <?$APPLICATION->IncludeComponent(
+                            "bitrix:main.feedback",
+                            "",
+                            Array(
+                                "USE_CAPTCHA" => "Y",
+                                "OK_TEXT" => "Спасибо, ваше сообщение принято.",
+                                "EMAIL_TO" => "my@email.com",
+                                "REQUIRED_FIELDS" => Array("NAME","EMAIL","MESSAGE"),
+                                "EVENT_MESSAGE_ID" => Array("5"),
+                                "AJAX_MODE" => "Y",
+                                "AJAX_OPTION_SHADOW" => "N",
+                                "AJAX_OPTION_JUMP" => "N",
+                                "AJAX_OPTION_STYLE" => "Y",
+                                "AJAX_OPTION_HISTORY" => "N",
+                            )
+                    );?>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fashion  End -->
     <!-- Fashion Area Start -->
     <div class="fashion-area" data-bg-image="<?= SITE_TEMPLATE_PATH?>/assets/images/fashion/fashion-bg.webp">
         <div class="container h-100">
