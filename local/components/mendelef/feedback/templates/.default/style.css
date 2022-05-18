@@ -1,0 +1,42 @@
+.m_form {
+    margin: 50px 10px;
+}
+
+.m_form label,
+.m_form span {
+    display: block;
+    margin: 15px 0 0;
+}
+
+.m_form input {
+    border-radius: 3px;
+}
+
+.m_error {
+    border: 2px solid tomato;
+}
+
+.m_textarea {
+    border-radius: 3px;
+    resize: none;
+    max-height: 100px;
+    overflow-y: scroll;
+}
+
+.m_buttom {
+    background: #7598a7;
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    font-size: 18px;
+    text-transform: lowercase;
+    line-height: 0;
+    padding: 5px 15px;
+}
+
+.m_buttom:hover {
+    background: #577380;
+}
